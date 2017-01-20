@@ -18,7 +18,7 @@ hbs.registerHelper('fullName', (person)=>{
 
 app.use((req, res, next)=>{
 var url = `${new Date().toString()} : ${req.path} ${req.method}`;
-fs.appendFile('server.log',url + '\n',(err)=>{
+fs.appendFile(__dirname + '/views/server.log',url + '\n',(err)=>{
     if(err) throw err;
 });
 console.log(url)
@@ -41,7 +41,11 @@ app.get('/', (req, res)=>{
         ]
 
     });
-})
+});
+
+app.get('/about',(req, res)=>{
+    res.render('about.hbs')
+});
 
 app.listen(port, ()=>{
     console.log('Server Started')
